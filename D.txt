@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+#define ll long long
+#define scnaf scanf
+const int N=1e5+5;
+char s[N];
+int main()
+{
+    int t;
+    scnaf("%d",&t);
+    while(t--)
+    {
+        getchar();
+        scanf("%s",s);
+        int ans=strlen(s);
+        for(int i=1;i<strlen(s);i++)
+            if(s[i]==s[i-1])
+                ans++;
+        printf("%d\n",ans);
+    }
+    return 0;
+}

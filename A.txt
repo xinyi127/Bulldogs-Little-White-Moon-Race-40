@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+#define ll long long
+#define scnaf scanf
+ll n;
+ll slove()
+{
+    ll i=0,j,k=0;
+    for(j=0;(1<<j)<=n;j++)
+        if((1<<j)&n)
+            k++;
+    if(k&1)
+    {
+        if(n&1)
+            return (k-1)*2+1;
+        else return (k-1)*2+3;
+    }
+    else
+    {
+        if(n&1)
+            return (k-1)*2;
+        else return (k-1)*2+2;
+    }
+}
+int main()
+{
+    ll t;
+    scanf("%lld",&t);
+    while(t--)
+    {
+        scanf("%lld",&n);
+        printf("%lld\n",slove());
+    }
+    return 0;
+}

@@ -1,0 +1,32 @@
+/*
+开始的时候想复杂了，遇到题目老是想着模拟，模拟个单的模拟，多想想能不能将问题分解
+很普通的dp，记忆化很好用，但是反复递归易超时
+*/
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+#define scnaf scanf
+#define ll long long
+const ll N=4e3+5;
+ll a[N],dp[N][N];
+ll slove(ll l,ll r)
+{
+    if(l==r)
+        return a[l];
+    if(dp[l][r])//说明已经找过这个区间[l,r]的最佳分数，直接返回即可
+        return dp[l][r];
+    return dp[l][r]=max(slove(l,r-1)+a[r]*(r-l+1),slove(l+1,r)+a[l]*(r-l+1));
+}
+int main()
+{
+    ll i,j,k,n,ans=0;
+    scanf("%lld",&n);
+    for(i=1;i<=n;i++)
+        scnaf("%lld",&a[i]),a[i+n]=a[i];
+    for(i=1;i<=n;i++)
+        ans=max(ans,slove(i,i+n-1));
+    printf("%lld\n",ans);
+    return 0;
+}

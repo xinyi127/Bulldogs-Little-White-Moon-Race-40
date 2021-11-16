@@ -1,0 +1,50 @@
+/*
+next_permutation()函数将会返回给定数组的下一个字典序（默认）并改变数组。
+可以自定义排列方式。数组会改变。如果要遍历全排列，原数组必须升序排序。
+括号内填数组名和数组范围，该函数会求出给定的范围内的序列的下一个排列方式给出并放在原数组中
+*/
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+#define scnaf scanf
+#define ll long long
+int a[15],b[15],n;
+//a[i],序号为i的人要排在序号为a[i]的人前
+//b[i],排在位置i的人的序号
+int slove()
+{
+    int i,j,k;
+    for(i=1;i<=n;i++)
+    {
+        if(a[b[i]]==b[i])
+        //b[i]的值一直在改变，但是无要求的人所对应的位置是本身不会改变
+            continue;
+        for(j=1;j<i;j++)
+        //例如3要排在5的前面，就看看5是不是在3的前面，如果是，说明不符合。
+        {
+            if(b[j]==a[b[i]])
+                return 0;
+        }
+    }
+    return 1;
+}
+int main()
+{
+    int i,m=0;
+ //   printf("%d",1*2*3*4*5*6*7*8*9*10);//3628800
+    scnaf("%d",&n);
+    for(i=1;i<=n;i++)
+    {
+        scanf("%d",&a[i]);
+        b[i]=i;
+    }
+    do
+    {
+        if(slove())
+            m++;
+    }while(next_permutation(b+1,b+n+1));
+    printf("%d\n",m);
+    return 0;
+}
